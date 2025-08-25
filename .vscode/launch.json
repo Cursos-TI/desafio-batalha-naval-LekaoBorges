@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main() {
+    "configurations": [
+    {
+        "name": "(gdb) Anexar",
+        "type": "cppdbg",
+        "request": "attach",
+        "program": "insira o nome do programa, por exemplo ${workspaceFolder}/a.out",
+        "MIMode": "gdb",
+        "setupCommands": [
+            {
+                "description": "Habilitar a reformatação automática para gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            },
+            {
+                "description": "Definir Tipo de Desmontagem como Intel",
+                "text": "-gdb-set disassembly-flavor intel",
+                "ignoreFailures": true
+            }
+        ]
+    }
+    ]
+    // Definimos o tamanho do tabuleiro
+    int linhas = 10;
+    int colunas = 10;
+    
+    // O tabuleiro é uma matriz (array 2D) de 10x10
+    int tabuleiro[10][10];
+    
+    // As posições do navio na vertical
+    int linha_navio = 2;
+    int coluna_navio = 5;
+    
+    int i, j;
+    
+    // Preenchemos o tabuleiro com 0s para representar a água
+    for (i = 0; i < linhas; i++) {
+        for (j = 0; j < colunas; j++) {
+            tabuleiro[i][j] = 0;
+        }
+    }

@@ -1,40 +1,71 @@
 #include <stdio.h>
 
+#define TAMANHO_TABULEIRO 10
+#define AGUA 0
+#define NAVIO 3
+
 int main() {
-    // Definimos o tamanho do tabuleiro
-    int linhas = 10;
-    int colunas = 10;
-    
-    // O tabuleiro é uma matriz (array 2D) de 10x10
-    int tabuleiro[10][10];
-    
-    // As posições do navio na horizontal
-    int linha_navio = 4;
-    int coluna_navio = 3;
-    
-    int i, j;
-    
-    // Preenchemos o tabuleiro com 0s para representar a água
-    for (i = 0; i < linhas; i++) {
-        for (j = 0; j < colunas; j++) {
-            tabuleiro[i][j] = 0;
+    // Declaração da matriz 10x10
+    int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO];
+
+    // --- 1. Inicialização do Tabuleiro ---
+    // Preenche todo o tabuleiro com 0 (água)
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+            tabuleiro[i][j] = AGUA;
         }
     }
-    
-    // Colocamos o navio na horizontal, com 3 posições, usando o número 3
-    // O loop avança nas colunas, mantendo a mesma linha
-    for (j = 0; j < 3; j++) {
-        tabuleiro[linha_navio][coluna_navio + j] = 3;
+
+    // --- 2. Posicionamento dos Navios ---
+
+
+    // Navio 1: 
+    int navioH_linha = 1;
+    int navioH_coluna = 1;
+    for (int i = 0; i < 4; i++) {
+        tabuleiro[navioH_linha][navioH_coluna + i] = NAVIO;
     }
-    
-    // Agora, exibimos o tabuleiro para ver o navio
-    printf("Tabuleiro (0 = agua, 3 = navio):\n");
-    for (i = 0; i < linhas; i++) {
-        for (j = 0; j < colunas; j++) {
+
+    // Navio 2:
+    int navioV_linha = 3;
+    int navioV_coluna = 8;
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[navioV_linha + i][navioV_coluna] = NAVIO;
+    }
+
+    // Navio 3: 
+    int navioD1_linha = 3;
+    int navioD1_coluna = 2;
+    for (int i = 0; i < 5; i++) {
+        tabuleiro[navioD1_linha + i][navioD1_coluna + i] = NAVIO;
+    }
+
+    // Navio 4: 
+    int navioD2_linha = 0;
+    int navioD2_coluna = 8;
+    for (int i = 0; i < 2; i++) {
+        // linha aumenta enquanto a coluna diminui
+        tabuleiro[navioD2_linha + i][navioD2_coluna - i] = NAVIO;
+    }
+
+
+    // --- 3. Exibição Completa ---
+    printf("===== BATALHA NAVAL - NIVEL AVENTUREIRO =====\n\n");
+    printf("   0 1 2 3 4 5 6 7 8 9\n"); // Guia de colunas
+    printf("-------------------------\n");
+
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+        printf("%d |", i); // Guia de linhas
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+            // Imprime o valor da posição (0 para água, 3 para navio)
             printf("%d ", tabuleiro[i][j]);
         }
-        printf("\n"); // Quebra de linha para a próxima linha do tabuleiro
+        // Pula para a próxima linha
+        printf("\n");
     }
     
+    printf("\nLegenda: %d = Agua, %d = Navio\n", AGUA, NAVIO);
+    printf("=============================================\n");
+
     return 0;
 }
